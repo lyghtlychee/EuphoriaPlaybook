@@ -1,1 +1,5 @@
-
+---
+title: Custom
+description: Custom Euphoria Playbook configuration
+privilege: Admin
+actions:
