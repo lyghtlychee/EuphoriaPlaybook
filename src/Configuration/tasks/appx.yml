@@ -3,3 +3,10 @@ title: APPX
 description: Removal of APPX packages
 privilege: TrustedInstaller
 actions:
+
+  - !writeStatus: {status: "Removing Microsoft Edge"}
+  - !appx: {name: '*microsoft.microsoftedge.stable*', type: family, errorAction: Ignore, weight: 10, option: "remove-edge"}
+  - !appx: {name: '*Microsoft.MicrosoftEdge*', type: family, errorAction: Ignore, weight: 10, option: "remove-edge"}
+  - !appx: {name: '*Microsoft.MicrosoftEdgeDevToolsClient*', errorAction: Ignore, type: family, weight: 10, option: "remove-edge"}
+  - !file: {path: "C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe", errorAction: Ignore, option: "remove-edge"}
+  
