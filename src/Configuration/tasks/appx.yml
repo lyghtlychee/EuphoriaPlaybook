@@ -1,1 +1,5 @@
-
+---
+title: APPX
+description: Removal of APPX packages
+privilege: TrustedInstaller
+actions:
