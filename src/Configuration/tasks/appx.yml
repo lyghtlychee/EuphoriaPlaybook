@@ -10,3 +10,35 @@ actions:
   - !appx: {name: '*Microsoft.MicrosoftEdgeDevToolsClient*', errorAction: Ignore, type: family, weight: 10, option: "remove-edge"}
   - !file: {path: "C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe", errorAction: Ignore, option: "remove-edge"}
   
+  - !writeStatus: {status: "Removing Microsoft Copilot"}
+  - !appx: {name: 'Microsoft.Copilot*', type: family}
+
+  - !writeStatus: {status: "Removing Xbox Apps"}
+  - !appx: {name: 'Microsoft.Edge.GameAssist*', type: family}
+  - !appx: {name: 'Microsoft.GamingApp*', type: family}
+  - !appx: {name: 'Microsoft.Xbox*', type: family} 
+  - !appx: {name: 'Microsoft.XboxApp*', type: family}
+
+  - !writeStatus: {status: "Removing Microsoft Clipchamp"}
+  - !appx: {name: 'Clipchamp.Clipchamp*', type: family}
+
+  - !writeStatus: {status: "Removing Mail and Calendar"}
+  - !appx: {name: 'microsoft.windowscommunicationsapps*', type: family}
+
+  - !writeStatus: {status: "Removing Zune Video"}
+  - !appx: {name: 'Microsoft.ZuneVideo*', type: family}
+
+  - !writeStatus: {status: "Removing Bing"}
+  - !appx: {name: 'Microsoft.BingWeather*', type: family}
+  - !appx: {name: 'Microsoft.BingNews*', type: family}
+  - !appx: {name: 'Microsoft.BingSearch*', type: family}
+
+  - !writeStatus: {status: "Removing Outlook"}
+  - !appx: {name: 'Microsoft.OutlookForWindows*', type: family}
+
+  # Clear caches of Client.CBS and more (Full credits to AtlasOS)
+  # Start menu cache is cleared later
+  - !writeStatus: {status: 'Clearing AppX caches'}
+  - !appx: {operation: clearCache, name: '*MicrosoftWindows.Client.CBS*'}
+  - !appx: {operation: clearCache, name: '*Microsoft.Windows.Search*'}
+  - !appx: {operation: clearCache, name: '*Microsoft.Windows.SecHealthUI*'}
