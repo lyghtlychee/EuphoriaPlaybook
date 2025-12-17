@@ -15,4 +15,7 @@ actions:
   - !task: {path: 'tasks\components.yml'}
 
   - !writeStatus: {status: "Applying configs..."}
-  - !task: {path: 'tasks\conifg.yml'}
+  - !task: {path: 'tasks\config.yml'}
+
+  - !writeStatus: {status: "Applying final configs..."}
+  - !task: {path: 'tasks\final.yml'}
