@@ -16,13 +16,13 @@ actions:
  - !taskKill: {name: "MicrosoftEdge*", errorAction: Ignore}
  - !taskKill: {name: "setup", errorAction: Ignore, pathContains: "\\Edge"}
 
-  - !powerShell: # https://github.com/he3als/EdgeRemover
+ - !powerShell: # https://github.com/he3als/EdgeRemover
     command: 'iex """&{$(irm https://raw.githubusercontent.com/he3als/EdgeRemover/main/RemoveEdge.ps1)} -UninstallEdge -RemoveEdgeData -KeepAppX -NonInteractive"""'
     runas: currentUserElevated
     option: "remove-edge"
     wait: true
     weight: 40
-  - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", option: "remove-edge", weight: 50}
+ - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", option: "remove-edge", weight: 50}
 
   # OneDrive
   - !writeStatus: {status: "Removing OneDrive", option: "remove-onedrive"}
