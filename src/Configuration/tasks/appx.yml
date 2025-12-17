@@ -12,8 +12,17 @@ actions:
   - !writeStatus: {status: "Removing 3DViewer"}
   - !appx: {name: 'Microsoft.Microsoft3DViewer*', type: family}
 
+  - !appx: {name: 'Disney.37853FC22B2CE*', type: family}
+
   - !writeStatus: {status: "Removing Advertising"}
   - !appx: {name: 'Microsoft.Advertising*', type: family}
+  - !appx: {name: 'Microsoft.Advertising.Xaml*', type: family}
+
+  - !writeStatus: {status: "Removing Hotspot Shield"}
+  - !appx: {name: 'HotspotShieldFreeVPN*', type: family}
+
+  - !writeStatus: {status: "Removing Recall"}
+  - !appx: {name: 'MicrosoftWindows.Client.AIX*', type: family}
 
   - !writeStatus: {status: "Removing Alarms"}
   - !appx: {name: 'Microsoft.WindowsAlarms*', type: family}
@@ -30,11 +39,19 @@ actions:
   - !writeStatus: {status: "Removing PeopleExperienceHost"}
   - !appx: {name: 'PeopleExperienceHost*', type: family}
 
+  - !writeStatus: {status: "Removing OneDrive"}
+  - !appx: {name: '*OneDrive*', type: family, errorAction: Ignore}
+
   - !writeStatus: {status: "Removing Xbox Apps"}
   - !appx: {name: 'Microsoft.Edge.GameAssist*', type: family}
   - !appx: {name: 'Microsoft.GamingApp*', type: family}
   - !appx: {name: 'Microsoft.Xbox*', type: family} 
   - !appx: {name: 'Microsoft.XboxApp*', type: family}
+  - !appx: {name: 'Microsoft.Xbox.TCUI*', type: family}
+  - !appx: {name: 'Microsoft.XboxGameOverlay*', type: family}
+  - !appx: {name: 'Microsoft.XboxGamingOverlay*', type: family}
+  - !appx: {name: 'Microsoft.XboxIdentityProvider*', type: family}
+  - !appx: {name: 'Microsoft.XboxSpeechToTextOverlay*', type: family}
 
   - !writeStatus: {status: "Removing GetStarted"}
   - !appx: {name: 'Microsoft.Getstarted*', type: family}
@@ -51,8 +68,31 @@ actions:
   - !writeStatus: {status: "Removing Widgets"}
   - !appx: {name: 'MicrosoftWindows.Client.WebExperience*', errorAction: Ignore, type: family}
 
+  - !writeStatus: {status: "Removing UWP Office"}
+  - !appx: {name: 'Microsoft.MicrosoftOfficeHub*', type: family}
+  - !appx: {name: 'Microsoft.Office.Excel*', type: family}
+  - !appx: {name: 'Microsoft.Office.PowerPoint*', type: family}
+  - !appx: {name: 'Microsoft.Office.Word*', type: family}
+  - !appx: {name: 'Microsoft.Office.OneNote*', type: family}
+
+  - !writeStatus: {status: "Removing MixedRealityPortal"}
+  - !appx: {name: 'MixedReality.Portal*', type: family}
+
   - !writeStatus: {status: "Removing Maps"}
   - !appx: {name: 'Microsoft.WindowsMaps*', type: family}
+
+  - !writeStatus: {status: "Removing MixedRealityPortal"}
+  - !appx: {name: 'MixedReality.Portal*', type: family}
+
+  - !writeStatus: {status: "Removing FlipGrid"}
+  - !appx: {name: 'Flipgrid*', type: family}
+
+  - !writeStatus: {status: "Removing News"}
+  - !appx: {name: 'Microsoft.News*', type: family}
+
+  - !writeStatus: {status: "Removing Windows Phone"}
+  - !appx: {name: 'MicrosoftWindows.CrossDevice*', type: family}
+  - !appx: {name: 'Microsoft.YourPhone*', type: family}
 
   - !writeStatus: {status: "Removing Sticky Notes"}
   - !appx: {name: '*Microsoft.MicrosoftStickyNotes*', type: family}
@@ -124,6 +164,9 @@ actions:
 
   - !writeStatus: {status: "Removing ZuneMusic"}
   - !appx: {name: 'Microsoft.ZuneMusic*', type: family}
+
+  - !writeStatus: {status: "Removing Handwriting}
+  - !appx: {name: 'Ink.Handwriting.Main.Store.en-US1.0', type: family}
 
   # Clear caches of Client.CBS and more (Full credits to AtlasOS)
   # Start menu cache is cleared later
