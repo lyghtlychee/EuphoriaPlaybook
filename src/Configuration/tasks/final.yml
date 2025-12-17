@@ -1,0 +1,34 @@
+---
+title: Configuration
+description: Applies some Revision configurations
+privilege: TrustedInstaller
+actions:
+
+  - !cmd:
+    exeDir: true
+    command: 'robocopy "Wallpapers" "%systemroot%\Web\Wallpaper\MeetRevision\v2" /E /PURGE /IM /IT /NP'
+    ignoreErrors: true
+
+  - !powerShell:
+    command: '.\WALLPAPER.ps1 -Mode Desktop -ImagePath $env:systemroot\Web\Wallpaper\MeetRevision\v2\desktop.jpg'
+    exeDir: true
+    runas: currentUserElevated
+    option: "configure-wallpaper"
+    weight: 45
+
+  - !powerShell: 
+    command: '.\WALLPAPER.ps1 -Mode LockScreen -ImagePath $env:systemroot\Web\Wallpaper\MeetRevision\v2\lockscreen.jpg'
+    exeDir: true
+    runas: currentUserElevated
+    option: "configure-wallpaper"
+    weight: 45
+
+  - !powerShell:
+    command: 'Copy-Item -Path .\WALLPAPER.ps1 -Destination "$env:systemroot\Web\Wallpaper\MeetRevision" -Force'
+    exeDir: true
+    option: "configure-wallpaper"
+  
+  - !powerShell:
+    command: 'Copy-Item -Path .\WallpaperStartup.cmd -Destination "$env:systemroot\Web\Wallpaper\MeetRevision" -Force'
+    exeDir: true
+    option: "configure-wallpaper"
