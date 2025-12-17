@@ -3,3 +3,9 @@ title: Custom
 description: Custom Euphoria Playbook configuration
 privilege: Admin
 actions:
+
+  - !writeStatus: {status: "Removing AppX Packages..."}
+  - !task: {path: 'tasks\appx.yml'}
+
+  - !writeStatus: {status: "Removing components..."}
+  - !task: {path: 'tasks\components.yml'}
