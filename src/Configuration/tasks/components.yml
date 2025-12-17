@@ -4,9 +4,10 @@ description: Remove certain windows components
 privilege: TrustedInstaller
 actions:
 
- # Microsoft Edge
+ # All credits to SucklessWindows
+ # Microsoft Edge 
  - !writeStatus: {status: "Removing Microsoft Edge"}
- # Allow uninstall of Edge, EdgeUpdate and WebView (Thanks to SucklessWindows)
+ # Allow uninstall of Edge, EdgeUpdate, EdgeWebView 
  - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge', value: 'NoRemove', type: REG_DWORD, data: '0'}
  - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update', value: 'NoRemove', type: REG_DWORD, data: '0'}
  - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView', value: 'NoRemove', type: REG_DWORD, data: '0'}
@@ -14,3 +15,23 @@ actions:
  - !taskKill: {name: "msedge", errorAction: Ignore}
  - !taskKill: {name: "MicrosoftEdge*", errorAction: Ignore}
  - !taskKill: {name: "setup", errorAction: Ignore, pathContains: "\\Edge"}
+
+  - !powerShell: # https://github.com/he3als/EdgeRemover
+    command: 'iex """&{$(irm https://raw.githubusercontent.com/he3als/EdgeRemover/main/RemoveEdge.ps1)} -UninstallEdge -RemoveEdgeData -KeepAppX -NonInteractive"""'
+    runas: currentUserElevated
+    option: "remove-edge"
+    wait: true
+    weight: 40
+  - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", option: "remove-edge", weight: 50}
+
+  # OneDrive
+  - !writeStatus: {status: "Removing OneDrive", option: "remove-onedrive"}
+  - !taskKill: {name: "OneDriveStandaloneUpdater", errorAction: Ignore, option: "remove-onedrive"}
+  - !taskKill: {name: "OneDriveSetup", errorAction: Ignore, option: "remove-onedrive"}
+  - !taskKill: {name: "OneDrive*", errorAction: Ignore, option: "remove-onedrive"}
+
+  - !run: {exeDir: true, exe: "ONED.cmd", option: "remove-onedrive", weight: 40}
+  - !file: {path: "%SystemDrive%\\OneDriveTemp", option: "remove-onedrive"}
+  - !file: {path: "%ProgramData%\\Microsoft OneDrive", option: "remove-onedrive"}
+
+  # - !run: {exe: "explorer.exe", wait: false}
