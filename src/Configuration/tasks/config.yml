@@ -4,9 +4,8 @@ description: Applies some configurations
 privilege: TrustedInstaller
 actions:
 
-    # Necessary to refresh start menu entries etc. (Thanks to SucklessWindows)
+    # Necessary to refresh start menu entries, etc. (Thanks to SucklessWindows)
   - !appx: {operation: clearCache, name: '*Client.CBS*'}
-  - !appx: {operation: clearCache, name: '*StartMenuExperienceHost*'}
   - !appx: {operation: clearCache, name: '*Windows.Search*'}
   - !appx: {operation: clearCache, name: '*TCUI*'}
     # Workaround for KGL versions to match (Thanks to SucklessWindows)
