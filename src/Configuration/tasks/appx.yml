@@ -3,15 +3,32 @@ title: APPX
 description: Removal of APPX packages
 privilege: TrustedInstaller
 actions:
-
   - !writeStatus: {status: "Removing Microsoft Edge"}
-  - !appx: {name: '*microsoft.microsoftedge.stable*', type: family, errorAction: Ignore, weight: 10, option: "remove-edge"}
-  - !appx: {name: '*Microsoft.MicrosoftEdge*', type: family, errorAction: Ignore, weight: 10, option: "remove-edge"}
-  - !appx: {name: '*Microsoft.MicrosoftEdgeDevToolsClient*', errorAction: Ignore, type: family, weight: 10, option: "remove-edge"}
-  - !file: {path: "C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe", errorAction: Ignore, option: "remove-edge"}
+  - !appx: {name: 'microsoft.microsoftedge.stable*', errorAction: Ignore, type: family}
+  - !appx: {name: 'Microsoft.MicrosoftEdge*', errorAction: Ignore, type: family}
+  - !appx: {name: 'Microsoft.MicrosoftEdgeDevToolsClient*', errorAction: Ignore, type: family}
+  - !file: {path: "C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe", errorAction: Ignore}
+
+  - !writeStatus: {status: "Removing 3DViewer"}
+  - !appx: {name: 'Microsoft.Microsoft3DViewer*', type: family}
+
+  - !writeStatus: {status: "Removing Advertising"}
+  - !appx: {name: 'Microsoft.Advertising*', type: family}
+
+  - !writeStatus: {status: "Removing Alarms"}
+  - !appx: {name: 'Microsoft.WindowsAlarms*', type: family}
   
   - !writeStatus: {status: "Removing Microsoft Copilot"}
   - !appx: {name: 'Microsoft.Copilot*', type: family}
+
+  - !writeStatus: {status: "Removing SecureAssessmentBrowser"}
+  - !appx: {name: 'SecureAssessmentBrowser*', type: family}
+
+  - !writeStatus: {status: "Removing Spotify"}
+  - !appx: {name: 'SpotifyAB.SpotifyMusic*', type: family}
+
+  - !writeStatus: {status: "Removing PeopleExperienceHost"}
+  - !appx: {name: 'PeopleExperienceHost*', type: family}
 
   - !writeStatus: {status: "Removing Xbox Apps"}
   - !appx: {name: 'Microsoft.Edge.GameAssist*', type: family}
@@ -19,22 +36,94 @@ actions:
   - !appx: {name: 'Microsoft.Xbox*', type: family} 
   - !appx: {name: 'Microsoft.XboxApp*', type: family}
 
-  - !writeStatus: {status: "Removing Microsoft Clipchamp"}
+  - !writeStatus: {status: "Removing GetStarted"}
+  - !appx: {name: 'Microsoft.Getstarted*', type: family}
+
+  - !writeStatus: {status: "Removing Todos"}
+  - !appx: {name: 'Microsoft.Todos*', type: family}
+
+  - !writeStatus: {status: "Removing Solitaire"}
+  - !appx: {name: 'Microsoft.MicrosoftSolitaireCollection*', type: family}
+
+  - !writeStatus: {status: "Removing GetHelp"}
+  - !appx: {name: 'Microsoft.GetHelp*', type: family}
+
+  - !writeStatus: {status: "Removing Widgets"}
+  - !appx: {name: 'MicrosoftWindows.Client.WebExperience*', errorAction: Ignore, type: family}
+
+  - !writeStatus: {status: "Removing Maps"}
+  - !appx: {name: 'Microsoft.WindowsMaps*', type: family}
+
+  - !writeStatus: {status: "Removing Sticky Notes"}
+  - !appx: {name: '*Microsoft.MicrosoftStickyNotes*', type: family}
+
+  - !writeStatus: {status: "Removing Clipchamp"}
   - !appx: {name: 'Clipchamp.Clipchamp*', type: family}
 
   - !writeStatus: {status: "Removing Mail and Calendar"}
-  - !appx: {name: 'microsoft.windowscommunicationsapps*', type: family}
+  - !appx: {name: 'Microsoft.windowscommunicationsapps*', type: family}
 
-  - !writeStatus: {status: "Removing Zune Video"}
+  - !writeStatus: {status: "Removing People"}
+  - !appx: {name: 'Microsoft.People*', type: family}
+
+  - !writeStatus: {status: "Removing ZuneVideo"}
   - !appx: {name: 'Microsoft.ZuneVideo*', type: family}
 
+  - !writeStatus: {status: "Removing Feedback"}
+  - !appx: {name: 'Microsoft.WindowsFeedbackHub*', type: family}
+
+  - !writeStatus: {status: "Removing Cortana"}
+  - !appx: {name: 'Microsoft.549981C3F5F10*', type: family}
+
+  - !writeStatus: {status: "Removing Camera"}
+  - !appx: {name: 'Microsoft.WindowsCamera*', type: family}
+
   - !writeStatus: {status: "Removing Bing"}
+  - !appx: {name: 'Microsoft.BingFinance*', type: family
+  - !appx: {name: 'Microsoft.BingFoodAndDrink*', type: family}
   - !appx: {name: 'Microsoft.BingWeather*', type: family}
   - !appx: {name: 'Microsoft.BingNews*', type: family}
   - !appx: {name: 'Microsoft.BingSearch*', type: family}
+  - !appx: {name: 'Microsoft.BingHealthAndFitness*', type: family}
+  - !appx: {name: 'Microsoft.BingTranslator*', type: family}
+  - !appx: {name: 'Microsoft.BingTravel*', type: family}
+  - !appx: {name: 'Microsoft.BingSports*', type: family}
 
   - !writeStatus: {status: "Removing Outlook"}
   - !appx: {name: 'Microsoft.OutlookForWindows*', type: family}
+
+  - !writeStatus: {status: "Removing PowerAutomate"}
+  - !appx: {name: 'Microsoft.PowerAutomateDesktop*', type: family}
+
+  - !writeStatus: {status: "Removing QuickAssist"}
+  - !appx: {name: 'MicrosoftCorporationII.QuickAssist*', type: family}
+
+  - !writeStatus: {status: "Removing Microsoft Family"}
+  - !appx: {name: 'MicrosoftCorporationII.MicrosoftFamily*', type: family}
+
+  - !writeStatus: {status: "Removing SoundRecorder"}
+  - !appx: {name: 'Microsoft.WindowsSoundRecorder*', type: family}
+
+  - !writeStatus: {status: "Removing TeamsforSurfaceHub"}
+  - !appx: {name: 'Microsoft.MicrosoftTeamsforSurfaceHub*', type: family}
+  
+  - !writeStatus: {status: "Removing MailforSurfaceHub"}
+  - !appx: {name: 'MicrosoftCorporationII.MailforSurfaceHub*', type: family}
+  
+  - !writeStatus: {status: "Removing PowerBI"}
+  - !appx: {name: 'Microsoft.MicrosoftPowerBIForWindows*', type: family}
+  
+  - !writeStatus: {status: "Removing Skype"}
+  - !appx: {name: 'Microsoft.SkypeApp*', type: family}
+
+  - !writeStatus: {status: "Removing Whiteboard"}
+  - !appx: {name: 'Microsoft.Whiteboard*', type: family}
+
+  - !writeStatus: {status: "Removing Skydrive"}
+  - !appx: {name: 'Microsoft.microsoftskydrive*', type: family}
+
+  - !writeStatus: {status: "Removing ZuneMusic"}
+  - !appx: {name: 'Microsoft.ZuneMusic*', type: family}
 
   # Clear caches of Client.CBS and more (Full credits to AtlasOS)
   # Start menu cache is cleared later
