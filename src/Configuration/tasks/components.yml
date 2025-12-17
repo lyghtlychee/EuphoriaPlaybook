@@ -1,1 +1,16 @@
+---
+title: Components
+description: Remove certain windows components
+privilege: TrustedInstaller
+actions:
 
+ # Microsoft Edge
+ - !writeStatus: {status: "Removing Microsoft Edge"}
+ # Allow uninstall of Edge, EdgeUpdate and WebView (Thanks to SucklessWindows)
+ - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge', value: 'NoRemove', type: REG_DWORD, data: '0'}
+ - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update', value: 'NoRemove', type: REG_DWORD, data: '0'}
+ - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView', value: 'NoRemove', type: REG_DWORD, data: '0'}
+ - !taskKill: {name: "MicrosoftEdgeUpdate", errorAction: Ignore}
+ - !taskKill: {name: "msedge", errorAction: Ignore}
+ - !taskKill: {name: "MicrosoftEdge*", errorAction: Ignore}
+ - !taskKill: {name: "setup", errorAction: Ignore, pathContains: "\\Edge"}
