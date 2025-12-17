@@ -3,7 +3,13 @@ title: APPX
 description: Removal of APPX packages
 privilege: TrustedInstaller
 actions:
+
+  # All credits to ReviOS, AtlasOS
   - !writeStatus: {status: "Removing Microsoft Edge"}
+  - !taskKill: {name: "MicrosoftEdgeUpdate", errorAction: Ignore}
+  - !taskKill: {name: "msedge", errorAction: Ignore}
+  - !taskKill: {name: "MicrosoftEdge*", errorAction: Ignore}
+  - !taskKill: {name: "setup", errorAction: Ignore, pathContains: "\\Edge"}
   - !appx: {name: 'microsoft.microsoftedge.stable*', errorAction: Ignore, type: family}
   - !appx: {name: 'Microsoft.MicrosoftEdge*', errorAction: Ignore, type: family}
   - !appx: {name: 'Microsoft.MicrosoftEdgeDevToolsClient*', errorAction: Ignore, type: family}
@@ -33,6 +39,10 @@ actions:
   - !registryValue: {path: 'HKCR\Software\Policies\Microsoft\Windows\WindowsCopilot', value: 'TurnOffWindowsCopilot', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKCR\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'ShowCopilotButton', type: REG_DWORD, data: '0'}
 
+  - !run: {exeDir: true, exe: "ONED.cmd", oobe: false, iso: false, weight: 40}
+  - !file: {path: "%SystemDrive%\\OneDriveTemp"}
+  - !file: {path: "%ProgramData%\\Microsoft OneDrive"}
+
   - !writeStatus: {status: "Removing SecureAssessmentBrowser"}
   - !appx: {name: 'SecureAssessmentBrowser*', type: family}
 
@@ -42,8 +52,19 @@ actions:
   - !writeStatus: {status: "Removing PeopleExperienceHost"}
   - !appx: {name: 'PeopleExperienceHost*', type: family}
 
+  - !writeStatus: {status: "Removing Teams"}
+  - !taskKill: {name: "Teams", errorAction: Ignore}
+  - !taskKill: {name: "Update", errorAction: Ignore}
+  - !taskKill: {name: "ms-teamsupdate", errorAction: Ignore}
+
+  - !appx: {name: 'MicrosoftTeams*', type: family, errorAction: Ignore}
+  - !appx: {name: 'MSTeams*', type: family, errorAction: Ignore}
+
   - !writeStatus: {status: "Removing OneDrive"}
-  - !appx: {name: '*OneDrive*', type: family, errorAction: Ignore}
+  - !taskKill: {name: "OneDriveStandaloneUpdater", errorAction: Ignore}
+  - !taskKill: {name: "OneDriveSetup", errorAction: Ignore}
+  - !taskKill: {name: "OneDrive*", errorAction: Ignore}
+  - !appx: {name: 'OneDrive*', type: family, errorAction: Ignore}
 
   - !writeStatus: {status: "Removing Xbox Apps"}
   - !appx: {name: 'Microsoft.Edge.GameAssist*', type: family}
