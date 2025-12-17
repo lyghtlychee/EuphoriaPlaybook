@@ -175,7 +175,7 @@ actions:
   - !writeStatus: {status: "Removing ZuneMusic"}
   - !appx: {name: 'Microsoft.ZuneMusic*', type: family}
 
-  - !writeStatus: {status: "Removing Handwriting}
+  - !writeStatus: {status: "Removing Handwriting"}
   - !appx: {name: 'Ink.Handwriting.Main.Store.en-US1.0', type: family}
 
   # Clear caches of Client.CBS and more (Full credits to AtlasOS)
