@@ -9,3 +9,6 @@ actions:
 
   - !writeStatus: {status: "Removing components..."}
   - !task: {path: 'tasks\components.yml'}
+
+  - !writeStatus: {status: "Applying configs..."}
+  - !task: {path: 'tasks\conifg.yml'}
