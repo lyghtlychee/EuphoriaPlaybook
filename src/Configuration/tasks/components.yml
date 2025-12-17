@@ -25,13 +25,9 @@ actions:
  - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", option: "remove-edge", weight: 50}
 
   # OneDrive
-  - !writeStatus: {status: "Removing OneDrive", option: "remove-onedrive"}
-  - !taskKill: {name: "OneDriveStandaloneUpdater", errorAction: Ignore, option: "remove-onedrive"}
-  - !taskKill: {name: "OneDriveSetup", errorAction: Ignore, option: "remove-onedrive"}
-  - !taskKill: {name: "OneDrive*", errorAction: Ignore, option: "remove-onedrive"}
-
-  - !run: {exeDir: true, exe: "ONED.cmd", option: "remove-onedrive", weight: 40}
-  - !file: {path: "%SystemDrive%\\OneDriveTemp", option: "remove-onedrive"}
-  - !file: {path: "%ProgramData%\\Microsoft OneDrive", option: "remove-onedrive"}
-
+ - !writeStatus: {status: "Removing OneDrive", option: "remove-onedrive"}
+ - !taskKill: {name: "OneDriveStandaloneUpdater", errorAction: Ignore, option: "remove-onedrive"}
+ - !taskKill: {name: "OneDriveSetup", errorAction: Ignore, option: "remove-onedrive"}
+ - !taskKill: {name: "OneDrive*", errorAction: Ignore, option: "remove-onedrive"}
+  
   # - !run: {exe: "explorer.exe", wait: false}
