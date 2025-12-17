@@ -55,6 +55,11 @@ actions:
   - !appx: {name: 'Microsoft.XboxGamingOverlay*', type: family}
   - !appx: {name: 'Microsoft.XboxIdentityProvider*', type: family}
   - !appx: {name: 'Microsoft.XboxSpeechToTextOverlay*', type: family}
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: 'URL:ms-gamebar'}
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: 'URL Protocol', type: REG_SZ, data: ''}
+  - !registryKey: {path: 'HKCR\ms-gamebar\shell\open\command', operation: add}
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: '%SystemRoot%\System32\systray.exe'}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\GameBar', value: 'ShowStartupPanel', type: REG_DWORD, data: '0'}
 
   - !writeStatus: {status: "Removing GetStarted"}
   - !appx: {name: 'Microsoft.Getstarted*', type: family}
@@ -134,6 +139,8 @@ actions:
 
   - !writeStatus: {status: "Removing Outlook"}
   - !appx: {name: 'Microsoft.OutlookForWindows*', type: family}
+  - !appx: {name: 'OutlookForWindows*', type: family}
+  - !appx: {name: 'OutlookPWA*', type: family}
 
   - !writeStatus: {status: "Removing PowerAutomate"}
   - !appx: {name: 'Microsoft.PowerAutomateDesktop*', type: family}
