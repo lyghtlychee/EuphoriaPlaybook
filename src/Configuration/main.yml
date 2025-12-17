@@ -4,6 +4,10 @@ description: Custom Euphoria Playbook configuration
 privilege: Admin
 actions:
 
+  - !writeStatus: {status: "Getting started..."}
+  - !task: {path: 'sw\revert.yml'}
+  - !task: {path: 'sw\start.yml'}
+  
   - !writeStatus: {status: "Removing AppX Packages..."}
   - !task: {path: 'tasks\appx.yml'}
 
