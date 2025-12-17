@@ -28,7 +28,10 @@ actions:
   - !appx: {name: 'Microsoft.WindowsAlarms*', type: family}
   
   - !writeStatus: {status: "Removing Microsoft Copilot"}
-  - !appx: {name: 'Microsoft.Copilot*', type: family}
+  - !appx: {name: 'Microsoft.Copilot*', type: family, errorAction: Ignore, weight: 10}
+  - !appx: {name: 'Microsoft.Windows.Ai.Copilot.Provider', type: family, errorAction: Ignore, weight: 10}
+  - !registryValue: {path: 'HKCR\Software\Policies\Microsoft\Windows\WindowsCopilot', value: 'TurnOffWindowsCopilot', type: REG_DWORD, data: '1'}
+  - !registryValue: {path: 'HKCR\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'ShowCopilotButton', type: REG_DWORD, data: '0'"
 
   - !writeStatus: {status: "Removing SecureAssessmentBrowser"}
   - !appx: {name: 'SecureAssessmentBrowser*', type: family}
