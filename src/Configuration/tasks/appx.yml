@@ -127,7 +127,7 @@ actions:
   - !appx: {name: 'Microsoft.WindowsCamera*', type: family}
 
   - !writeStatus: {status: "Removing Bing"}
-  - !appx: {name: 'Microsoft.BingFinance*', type: family
+  - !appx: {name: 'Microsoft.BingFinance*', type: family}
   - !appx: {name: 'Microsoft.BingFoodAndDrink*', type: family}
   - !appx: {name: 'Microsoft.BingWeather*', type: family}
   - !appx: {name: 'Microsoft.BingNews*', type: family}
