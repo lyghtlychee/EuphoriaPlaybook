@@ -53,7 +53,7 @@ actions:
       powercfg -delete 3ff9831b-6f80-4830-8178-736cd4229e7b
 
   - !run: {exe: "powercfg", args: "-duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61 3ff9831b-6f80-4830-8178-736cd4229e7b"}
-  - !run: {exe: "powercfg", args: "-changename 3ff9831b-6f80-4830-8178-736cd4229e7b \"Revision - Ultra Performance\" \"Windows's Ultimate Performance with additional changes.\""}
+  - !run: {exe: "powercfg", args: "-changename 3ff9831b-6f80-4830-8178-736cd4229e7b \"Revision Mode - Ultra Performance\" \"Windows's Ultimate Performance with additional changes.\""}
   - !run: {exe: "powercfg", args: "-s 3ff9831b-6f80-4830-8178-736cd4229e7b"}
   - !run: {exe: "powercfg", args: "-setacvalueindex scheme_current sub_processor PERFINCPOL 2"}
   - !run: {exe: "powercfg", args: "-setacvalueindex scheme_current sub_processor PERFDECPOL 1"}
@@ -63,9 +63,28 @@ actions:
   - !run: {exe: "powercfg", args: "-setacvalueindex scheme_current sub_processor CPMINCORES1 100"} # on hybrid CPUs, '1' at the end of the setting name is for P-cores
   - !run: {exe: "powercfg", args: "/setactive scheme_current"}
 
-  - !writeStatus: {status: "Optimizing PowerShell"}
-  - !run:
+# Browsers
+  - !writeStatus: {status: 'Installing Brave', option: 'browser-brave'}
+  - !powerShell:
+    command: '.\SOFTWARE.ps1 -Brave'
     exeDir: true
-    exe: "PowerShell"
-    args: '-NoP -ExecutionPolicy Bypass -File ngen.ps1'
-    weight: 100
+    wait: true
+    weight: 120
+    option: 'browser-brave'
+    runas: currentUserElevated
+  - !writeStatus: {status: 'Installing Firefox', option: 'browser-firefox'}
+  - !powerShell:
+    command: '.\SOFTWARE.ps1 -Firefox'
+    exeDir: true
+    wait: true
+    weight: 120
+    option: 'browser-firefox'
+    runas: currentUserElevated
+  - !writeStatus: {status: 'Installing Google Chrome', option: 'browser-chrome'}
+  - !powerShell:
+    command: '.\SOFTWARE.ps1 -Chrome'
+    exeDir: true
+    wait: true
+    weight: 120
+    option: 'browser-chrome'
+    runas: currentUserElevated
