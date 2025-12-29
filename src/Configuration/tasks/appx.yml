@@ -4,55 +4,112 @@ description: Removal of APPX packages
 privilege: TrustedInstaller
 actions:
 
-  # All credits to ReviOS, AtlasOS
-  - !writeStatus: {status: "Removing Microsoft Edge"}
+  - !writeStatus: {status: "Stopping Edge"}
   - !taskKill: {name: "MicrosoftEdgeUpdate", errorAction: Ignore}
   - !taskKill: {name: "msedge", errorAction: Ignore}
   - !taskKill: {name: "MicrosoftEdge*", errorAction: Ignore}
   - !taskKill: {name: "setup", errorAction: Ignore, pathContains: "\\Edge"}
-  - !appx: {name: 'microsoft.microsoftedge.stable*', errorAction: Ignore, type: family}
-  - !appx: {name: 'Microsoft.MicrosoftEdge*', errorAction: Ignore, type: family}
-  - !appx: {name: 'Microsoft.MicrosoftEdgeDevToolsClient*', errorAction: Ignore, type: family}
   - !file: {path: "C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe", errorAction: Ignore}
 
-  - !writeStatus: {status: "Removing 3DViewer"}
-  - !appx: {name: 'Microsoft.Microsoft3DViewer*', type: family}
+  - !writeStatus: {status: "Removing Appx Packages"}
+  - !powerShell:
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    weight: 48
+    command: >-
+      .\APPX-REMOVER.ps1 -Packages @(
+        'Microsoft.Windows.SecureAssessmentBrowser',
+        'Microsoft.Windows.PeopleExperienceHost',
+        'Microsoft.WindowsCamera',
+        'MicrosoftWindows.Client.WebExperience',
+        'Microsoft.WidgetsPlatformRuntime',
+        'Microsoft.BingFinance',
+        'Microsoft.BingFoodAndDrink',
+        'Microsoft.BingNews',
+        'Microsoft.BingSearch',
+        'Microsoft.BingWeather',
+        'Microsoft.BingHealthAndFitness',
+        'Microsoft.BingTranslator',
+        'Microsoft.BingTravel',
+        'Microsoft.BingSports',
+        'microsoft.microsoftedge.stable',
+        'Microsoft.MicrosoftEdge',
+        'Microsoft.MicrosoftEdgeDevToolsClient',
+        'Microsoft.MicrosoftSolitaireCollection',
+        'Microsoft.549981C3F5F10',
+        'Clipchamp.Clipchamp',
+        'Disney.37853FC22B2CE',
+        'SpotifyAB.SpotifyMusic',
+        'Microsoft.Microsoft3DViewer',
+        'Microsoft.Advertising',
+        'Microsoft.Advertising.Xaml'
+        'Microsoft.MSPaint',
+        'Microsoft.StartExperiencesApp',
+        'HotspotShieldFreeVPN',
+        'MicrosoftWindows.Client.AIX',
+        'Microsoft.WindowsAlarms',
+        'Microsoft.Copilot',
+        'Microsoft.Windows.Ai.Copilot.Provider',
+        'Microsoft.Edge.GameAssist',
+        'Microsoft.GamingApp',
+        'Microsoft.Xbox',
+        'Microsoft.XboxApp',
+        'Microsoft.Xbox.TCUI',
+        'Microsoft.XboxGameOverlay',
+        'Microsoft.XboxGamingOverlay',
+        'Microsoft.XboxIdentityProvider',
+        'Microsoft.XboxSpeechToTextOverlay',
+        'Microsoft.Getstarted',
+        'Microsoft.Todos',
+        'Microsoft.GetHelp',
+        'Microsoft.MicrosoftOfficeHub',
+        'Microsoft.Office.Excel',
+        'Microsoft.Office.PowerPoint',
+        'Microsoft.Office.Word',
+        'Microsoft.Office.OneNote',
+        'MixedReality.Portal',
+        'Microsoft.WindowsMaps',
+        'Flipgrid',
+        'Microsoft.News',
+        'MicrosoftWindows.CrossDevice',
+        'Microsoft.YourPhone',
+        'Microsoft.MicrosoftStickyNotes',
+        'Microsoft.windowscommunicationsapps',
+        'Microsoft.People',
+        'Microsoft.ZuneVideo',
+        'Microsoft.WindowsFeedbackHub',
+        'Microsoft.OutlookForWindows',
+        'OutlookForWindows',
+        'OutlookPWA',
+        'Microsoft.PowerAutomateDesktop',
+        'MicrosoftCorporationII.QuickAssist',
+        'MicrosoftCorporationII.MicrosoftFamily',
+        'Microsoft.WindowsSoundRecorder',
+        'Microsoft.MicrosoftTeamsforSurfaceHub',
+        'MicrosoftCorporationII.MailforSurfaceHub',
+        'Microsoft.MicrosoftPowerBIForWindows',
+        'Microsoft.SkypeApp',
+        'Microsoft.Whiteboard',
+        'Microsoft.microsoftskydrive',
+        'Microsoft.ZuneMusic',
+        'Ink.Handwriting.Main.Store.en-US1.0'
+      )
 
-  - !appx: {name: 'Disney.37853FC22B2CE*', type: family}
+  - !file: {path: "C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe", errorAction: Ignore}
 
-  - !writeStatus: {status: "Removing Advertising"}
-  - !appx: {name: 'Microsoft.Advertising*', type: family}
-  - !appx: {name: 'Microsoft.Advertising.Xaml*', type: family}
-
-  - !writeStatus: {status: "Removing Hotspot Shield"}
-  - !appx: {name: 'HotspotShieldFreeVPN*', type: family}
-
-  - !writeStatus: {status: "Removing Recall"}
-  - !appx: {name: 'MicrosoftWindows.Client.AIX*', type: family}
-
-  - !writeStatus: {status: "Removing Alarms"}
-  - !appx: {name: 'Microsoft.WindowsAlarms*', type: family}
-  
-  - !writeStatus: {status: "Removing Microsoft Copilot"}
-  - !appx: {name: 'Microsoft.Copilot*', type: family, errorAction: Ignore, weight: 10}
-  - !appx: {name: 'Microsoft.Windows.Ai.Copilot.Provider', type: family, errorAction: Ignore, weight: 10}
+  # Cpoilot Registry
   - !registryValue: {path: 'HKCR\Software\Policies\Microsoft\Windows\WindowsCopilot', value: 'TurnOffWindowsCopilot', type: REG_DWORD, data: '1'}
   - !registryValue: {path: 'HKCR\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced', value: 'ShowCopilotButton', type: REG_DWORD, data: '0'}
 
-  - !run: {exeDir: true, exe: "ONED.cmd", oobe: false, iso: false, weight: 40}
-  - !file: {path: "%SystemDrive%\\OneDriveTemp"}
-  - !file: {path: "%ProgramData%\\Microsoft OneDrive"}
+  # Xbox
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: 'URL:ms-gamebar'}
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: 'URL Protocol', type: REG_SZ, data: ''}
+  - !registryKey: {path: 'HKCR\ms-gamebar\shell\open\command', operation: add}
+  - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: '%SystemRoot%\System32\systray.exe'}
+  - !registryValue: {path: 'HKCU\Software\Microsoft\GameBar', value: 'ShowStartupPanel', type: REG_DWORD, data: '0'}
 
-  - !writeStatus: {status: "Removing SecureAssessmentBrowser"}
-  - !appx: {name: 'SecureAssessmentBrowser*', type: family}
-
-  - !writeStatus: {status: "Removing Spotify"}
-  - !appx: {name: 'SpotifyAB.SpotifyMusic*', type: family}
-
-  - !writeStatus: {status: "Removing PeopleExperienceHost"}
-  - !appx: {name: 'PeopleExperienceHost*', type: family}
-
-  - !writeStatus: {status: "Removing Teams"}
+  # MS                                                                                 
   - !taskKill: {name: "Teams", errorAction: Ignore}
   - !taskKill: {name: "Update", errorAction: Ignore}
   - !taskKill: {name: "ms-teamsupdate", errorAction: Ignore}
@@ -60,144 +117,10 @@ actions:
   - !appx: {name: 'MicrosoftTeams*', type: family, errorAction: Ignore}
   - !appx: {name: 'MSTeams*', type: family, errorAction: Ignore}
 
-  - !writeStatus: {status: "Removing OneDrive"}
   - !taskKill: {name: "OneDriveStandaloneUpdater", errorAction: Ignore}
   - !taskKill: {name: "OneDriveSetup", errorAction: Ignore}
   - !taskKill: {name: "OneDrive*", errorAction: Ignore}
   - !appx: {name: 'OneDrive*', type: family, errorAction: Ignore}
-
-  - !writeStatus: {status: "Removing Xbox Apps"}
-  - !appx: {name: 'Microsoft.Edge.GameAssist*', type: family}
-  - !appx: {name: 'Microsoft.GamingApp*', type: family}
-  - !appx: {name: 'Microsoft.Xbox*', type: family} 
-  - !appx: {name: 'Microsoft.XboxApp*', type: family}
-  - !appx: {name: 'Microsoft.Xbox.TCUI*', type: family}
-  - !appx: {name: 'Microsoft.XboxGameOverlay*', type: family}
-  - !appx: {name: 'Microsoft.XboxGamingOverlay*', type: family}
-  - !appx: {name: 'Microsoft.XboxIdentityProvider*', type: family}
-  - !appx: {name: 'Microsoft.XboxSpeechToTextOverlay*', type: family}
-  - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: 'URL:ms-gamebar'}
-  - !registryValue: {path: 'HKCR\ms-gamebar', value: 'URL Protocol', type: REG_SZ, data: ''}
-  - !registryKey: {path: 'HKCR\ms-gamebar\shell\open\command', operation: add}
-  - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: '%SystemRoot%\System32\systray.exe'}
-  - !registryValue: {path: 'HKCU\Software\Microsoft\GameBar', value: 'ShowStartupPanel', type: REG_DWORD, data: '0'}
-
-  - !writeStatus: {status: "Removing GetStarted"}
-  - !appx: {name: 'Microsoft.Getstarted*', type: family}
-
-  - !writeStatus: {status: "Removing Todos"}
-  - !appx: {name: 'Microsoft.Todos*', type: family}
-
-  - !writeStatus: {status: "Removing Solitaire"}
-  - !appx: {name: 'Microsoft.MicrosoftSolitaireCollection*', type: family}
-
-  - !writeStatus: {status: "Removing GetHelp"}
-  - !appx: {name: 'Microsoft.GetHelp*', type: family}
-
-  - !writeStatus: {status: "Removing Widgets"}
-  - !appx: {name: 'MicrosoftWindows.Client.WebExperience*', errorAction: Ignore, type: family}
-
-  - !writeStatus: {status: "Removing UWP Office"}
-  - !appx: {name: 'Microsoft.MicrosoftOfficeHub*', type: family}
-  - !appx: {name: 'Microsoft.Office.Excel*', type: family}
-  - !appx: {name: 'Microsoft.Office.PowerPoint*', type: family}
-  - !appx: {name: 'Microsoft.Office.Word*', type: family}
-  - !appx: {name: 'Microsoft.Office.OneNote*', type: family}
-
-  - !writeStatus: {status: "Removing MixedRealityPortal"}
-  - !appx: {name: 'MixedReality.Portal*', type: family}
-
-  - !writeStatus: {status: "Removing Maps"}
-  - !appx: {name: 'Microsoft.WindowsMaps*', type: family}
-
-  - !writeStatus: {status: "Removing MixedRealityPortal"}
-  - !appx: {name: 'MixedReality.Portal*', type: family}
-
-  - !writeStatus: {status: "Removing FlipGrid"}
-  - !appx: {name: 'Flipgrid*', type: family}
-
-  - !writeStatus: {status: "Removing News"}
-  - !appx: {name: 'Microsoft.News*', type: family}
-
-  - !writeStatus: {status: "Removing Windows Phone"}
-  - !appx: {name: 'MicrosoftWindows.CrossDevice*', type: family}
-  - !appx: {name: 'Microsoft.YourPhone*', type: family}
-
-  - !writeStatus: {status: "Removing Sticky Notes"}
-  - !appx: {name: '*Microsoft.MicrosoftStickyNotes*', type: family}
-
-  - !writeStatus: {status: "Removing Clipchamp"}
-  - !appx: {name: 'Clipchamp.Clipchamp*', type: family}
-
-  - !writeStatus: {status: "Removing Mail and Calendar"}
-  - !appx: {name: 'Microsoft.windowscommunicationsapps*', type: family}
-
-  - !writeStatus: {status: "Removing People"}
-  - !appx: {name: 'Microsoft.People*', type: family}
-
-  - !writeStatus: {status: "Removing ZuneVideo"}
-  - !appx: {name: 'Microsoft.ZuneVideo*', type: family}
-
-  - !writeStatus: {status: "Removing Feedback"}
-  - !appx: {name: 'Microsoft.WindowsFeedbackHub*', type: family}
-
-  - !writeStatus: {status: "Removing Cortana"}
-  - !appx: {name: 'Microsoft.549981C3F5F10*', type: family}
-
-  - !writeStatus: {status: "Removing Camera"}
-  - !appx: {name: 'Microsoft.WindowsCamera*', type: family}
-
-  - !writeStatus: {status: "Removing Bing"}
-  - !appx: {name: 'Microsoft.BingFinance*', type: family}
-  - !appx: {name: 'Microsoft.BingFoodAndDrink*', type: family}
-  - !appx: {name: 'Microsoft.BingWeather*', type: family}
-  - !appx: {name: 'Microsoft.BingNews*', type: family}
-  - !appx: {name: 'Microsoft.BingSearch*', type: family}
-  - !appx: {name: 'Microsoft.BingHealthAndFitness*', type: family}
-  - !appx: {name: 'Microsoft.BingTranslator*', type: family}
-  - !appx: {name: 'Microsoft.BingTravel*', type: family}
-  - !appx: {name: 'Microsoft.BingSports*', type: family}
-
-  - !writeStatus: {status: "Removing Outlook"}
-  - !appx: {name: 'Microsoft.OutlookForWindows*', type: family}
-  - !appx: {name: 'OutlookForWindows*', type: family}
-  - !appx: {name: 'OutlookPWA*', type: family}
-
-  - !writeStatus: {status: "Removing PowerAutomate"}
-  - !appx: {name: 'Microsoft.PowerAutomateDesktop*', type: family}
-
-  - !writeStatus: {status: "Removing QuickAssist"}
-  - !appx: {name: 'MicrosoftCorporationII.QuickAssist*', type: family}
-
-  - !writeStatus: {status: "Removing Microsoft Family"}
-  - !appx: {name: 'MicrosoftCorporationII.MicrosoftFamily*', type: family}
-
-  - !writeStatus: {status: "Removing SoundRecorder"}
-  - !appx: {name: 'Microsoft.WindowsSoundRecorder*', type: family}
-
-  - !writeStatus: {status: "Removing TeamsforSurfaceHub"}
-  - !appx: {name: 'Microsoft.MicrosoftTeamsforSurfaceHub*', type: family}
-  
-  - !writeStatus: {status: "Removing MailforSurfaceHub"}
-  - !appx: {name: 'MicrosoftCorporationII.MailforSurfaceHub*', type: family}
-  
-  - !writeStatus: {status: "Removing PowerBI"}
-  - !appx: {name: 'Microsoft.MicrosoftPowerBIForWindows*', type: family}
-  
-  - !writeStatus: {status: "Removing Skype"}
-  - !appx: {name: 'Microsoft.SkypeApp*', type: family}
-
-  - !writeStatus: {status: "Removing Whiteboard"}
-  - !appx: {name: 'Microsoft.Whiteboard*', type: family}
-
-  - !writeStatus: {status: "Removing Skydrive"}
-  - !appx: {name: 'Microsoft.microsoftskydrive*', type: family}
-
-  - !writeStatus: {status: "Removing ZuneMusic"}
-  - !appx: {name: 'Microsoft.ZuneMusic*', type: family}
-
-  - !writeStatus: {status: "Removing Handwriting"}
-  - !appx: {name: 'Ink.Handwriting.Main.Store.en-US1.0', type: family}
 
   # Clear caches of Client.CBS and more (Full credits to AtlasOS)
   # Start menu cache is cleared later
