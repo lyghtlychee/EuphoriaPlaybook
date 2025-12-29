@@ -5,8 +5,8 @@ privilege: Admin
 actions:
 
   - !writeStatus: {status: "Getting started..."}
-  - !task: {path: 'sw\revert.yml'}
-  - !task: {path: 'sw\start.yml'}
+  - !task: {path: 'tasks\revert.yml'}
+  - !task: {path: 'tasks\start.yml'}
   
   - !writeStatus: {status: "Removing AppX Packages..."}
   - !task: {path: 'tasks\appx.yml'}
