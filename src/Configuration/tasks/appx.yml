@@ -127,14 +127,15 @@ actions:
   - !registryValue: {path: 'HKCR\ms-gamebar', value: '', type: REG_SZ, data: '%SystemRoot%\System32\systray.exe'}
   - !registryValue: {path: 'HKCU\Software\Microsoft\GameBar', value: 'ShowStartupPanel', type: REG_DWORD, data: '0'}
 
-  # MS                                                                                 
+  # MSTeams                                                                             
   - !taskKill: {name: "Teams", errorAction: Ignore}
   - !taskKill: {name: "Update", errorAction: Ignore}
   - !taskKill: {name: "ms-teamsupdate", errorAction: Ignore}
-
   - !appx: {name: 'MicrosoftTeams*', type: family, errorAction: Ignore}
   - !appx: {name: 'MSTeams*', type: family, errorAction: Ignore}
+  - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications', value: 'ConfigureChatAutoInstall', type: REG_DWORD, data: '0'}
 
+  # OneDrive
   - !taskKill: {name: "OneDriveStandaloneUpdater", errorAction: Ignore}
   - !taskKill: {name: "OneDriveSetup", errorAction: Ignore}
   - !taskKill: {name: "OneDrive*", errorAction: Ignore}
