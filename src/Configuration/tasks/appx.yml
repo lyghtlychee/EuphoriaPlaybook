@@ -96,6 +96,24 @@ actions:
         'Ink.Handwriting.Main.Store.en-US1.0'
       )
 
+  - !writeStatus: {status: "Removing Photos"}
+  - !powerShell:
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    weight: 10
+    command: >-
+      .\APPX-REMOVER.ps1 -Packages 'Microsoft.Windows.Photos'
+
+  - !writeStatus: {status: "Removing Dev Home"}
+  - !powerShell:
+    wait: true
+    exeDir: true
+    errorAction: Ignore
+    weight: 10
+    command: >-
+      .\APPX-REMOVER.ps1 -Packages 'Microsoft.Windows.DevHome'
+
   - !file: {path: "C:\\Windows\\SystemApps\\Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe", errorAction: Ignore}
 
   # Cpoilot Registry
