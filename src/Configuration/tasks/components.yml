@@ -1,11 +1,22 @@
 ---
 title: Components
-description: Remove certain windows components
+description: Remove certain Windows components
 privilege: TrustedInstaller
 actions:
 
+  # Remove Security Center startup item (Thanks to AtlasOS)
+ - !registryValue: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run', value: 'SecurityHealth', operation: delete}
+
+  # Disable Smart App Control
+  # Causes slow app loading issues and sends data to Microsoft
+ - !registryValue:
+   path: 'HKLM\SYSTEM\CurrentControlSet\Control\CI\Policy'
+   value: 'VerifiedAndReputablePolicyState'
+   data: '0'
+   type: REG_DWORD
+
  # All credits to SucklessWindows
- # Microsoft Edge 
+ # Microsoft Edge (Need ONED.cmd)
  - !writeStatus: {status: "Removing Microsoft Edge"}
  # Allow uninstall of Edge, EdgeUpdate, EdgeWebView 
  - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge', value: 'NoRemove', type: REG_DWORD, data: '0'}
@@ -17,10 +28,10 @@ actions:
  - !taskKill: {name: "setup", errorAction: Ignore, pathContains: "\\Edge"}
 
  - !powerShell: # https://github.com/he3als/EdgeRemover
-    command: 'iex """&{$(irm https://raw.githubusercontent.com/he3als/EdgeRemover/main/RemoveEdge.ps1)} -UninstallEdge -RemoveEdgeData -KeepAppX -NonInteractive"""'
-    runas: currentUserElevated
-    wait: true
-    weight: 40
+   command: 'iex """&{$(irm https://raw.githubusercontent.com/he3als/EdgeRemover/main/RemoveEdge.ps1)} -UninstallEdge -RemoveEdgeData -KeepAppX -NonInteractive"""'
+   runas: currentUserElevated
+   wait: true
+   weight: 40
  - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", weight: 50}
 
   # OneDrive
