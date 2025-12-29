@@ -16,7 +16,7 @@ actions:
    type: REG_DWORD
 
  # All credits to SucklessWindows
- # Microsoft Edge (Need ONED.cmd)
+ # Microsoft Edge
  - !writeStatus: {status: "Removing Microsoft Edge"}
  # Allow uninstall of Edge, EdgeUpdate, EdgeWebView 
  - !registryValue: {path: 'HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge', value: 'NoRemove', type: REG_DWORD, data: '0'}
@@ -39,5 +39,6 @@ actions:
  - !taskKill: {name: "OneDriveStandaloneUpdater", errorAction: Ignore}
  - !taskKill: {name: "OneDriveSetup", errorAction: Ignore}
  - !taskKill: {name: "OneDrive*", errorAction: Ignore}
+ - !run: {exeDir: true, exe: 'ONED.cmd'}
   
   # - !run: {exe: "explorer.exe", wait: false}
