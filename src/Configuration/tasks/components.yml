@@ -15,7 +15,7 @@ actions:
    data: '0'
    type: REG_DWORD
 
- # All credits to SucklessWindows
+ # All credits to SucklessWindows, AtlasOS
  # Microsoft Edge
  - !writeStatus: {status: "Removing Microsoft Edge"}
  # Allow uninstall of Edge, EdgeUpdate, EdgeWebView 
@@ -33,6 +33,12 @@ actions:
    wait: true
    weight: 40
  - !file: {path: "%ProgramFiles(x86)%\\Microsoft\\Edge", weight: 50}
+
+     # AppX uninstallation in the script seems to fail, it's not used, and AME Wizard is used instead
+    # Note that AppX Edge is removed from the latest builds of Windows, but people could be running a non-updated version (Thanks to AtlasOS)
+ - !appx: {name: 'Microsoft.MicrosoftEdge_8wekyb3d8bbwe', type: family}
+ - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.MicrosoftEdge.Stable_8wekyb3d8bbwe', operation: add}
+ - !registryKey: {path: 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned\Microsoft.MicrosoftEdge_8wekyb3d8bbwe', operation: add}
 
   # OneDrive
  - !writeStatus: {status: "Removing OneDrive"}
