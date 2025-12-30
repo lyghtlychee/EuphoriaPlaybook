@@ -1,0 +1,29 @@
+---
+title: Services and Drivers
+description: Configures services and drivers to reduce background system resource utilization
+onUpgrade: false
+actions:
+
+  - !writeStatus: {status: 'Configuring services'}
+
+    # ------ Microsoft recommendation - 'OK to disable' ------
+  - !service: {name: 'OneSyncSvc', operation: change, startup: 4}
+  - !service: {name: 'TrkWks', operation: change, startup: 4}
+  - !service: {name: 'PcaSvc', operation: change, startup: 4}
+  - !service: {name: 'DiagTrack', operation: change, startup: 4}
+
+    # ------ Microsoft recommendation - 'Do not disable' -----
+  - !service: {name: 'diagnosticshub.standardcollector.service', operation: change, startup: 4}
+  - !service: {name: 'WerSvc', operation: change, startup: 4} 
+
+    # ------- Microsoft recommendation - 'No guidance' ------
+  - !service: {name: 'wercplsupport', operation: change, startup: 4}
+  - !service: {name: 'UCPD', operation: change, startup: 4}
+
+
+  - !writeStatus: {status: 'Configuring drivers'}
+
+  - !service: {name: 'GpuEnergyDrv', operation: change, startup: 4}
+    # NetBios support can be enabled with the file sharing script
+  - !service: {name: 'NetBT', operation: change, startup: 4}
+  - !service: {name: 'Telemetry', operation: change, startup: 4}
